@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vahanam – Global Car Marketplace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Vahanam is a global car marketplace where people in the USA, India and worldwide can buy and sell cars securely." />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #050811;
+      color: #f5f5f5;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      background: linear-gradient(90deg, #050b1b, #07152e);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #101b33;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #00f6ff;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 14px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #e0e0e0;
+    }
+
+    .btn {
+      border: 0;
+      padding: 8px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #00f6ff;
+      color: #00f6ff;
+    }
+
+    .btn-primary {
+      background: #00f6ff;
+      color: #050811;
+      font-weight: 600;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
+      padding: 36px 40px 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero-text p {
+      font-size: 14px;
+      color: #c1c9d6;
+      margin-bottom: 16px;
+      max-width: 520px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 11px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #10192b;
+      color: #9fb3ff;
+      border: 1px solid #1e2742;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top, #1a2440, #060913);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-card h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .hero-card p {
+      font-size: 12px;
+      color: #b0bec5;
+      margin-bottom: 12px;
+    }
+
+    .hero-card form {
+      display: grid;
+      gap: 10px;
+    }
+
+    .hero-card label {
+      font-size: 12px;
+      color: #b0bec5;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .hero-card input,
+    .hero-card select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #233046;
+      background: #090f1a;
+      color: #f5f5f5;
+      font-size: 13px;
+    }
+
+    .hero-card small {
+      font-size: 10px;
+      color: #78909c;
+    }
+
+    .section {
+      padding: 26px 40px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .filters input,
+    .filters select {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #233046;
+      background: #090f1a;
+      color: #f5f5f5;
+      font-size: 13px;
+    }
+
+    .car-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .car-card {
+      background: #090f1a;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .car-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .car-body {
+      padding: 12px 14px 14px;
+    }
+
+    .car-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .car-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .car-price {
+      color: #00f6ff;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .car-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 10px;
+      font-size: 11px;
+      color: #90a4ae;
+      margin-bottom: 8px;
+    }
+
+    .car-meta span::before {
+      content: "• ";
+      color: #455a64;
+    }
+
+    .car-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #78909c;
+    }
+
+    .tag {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #202b3f;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .how-text {
+      font-size: 13px;
+      color: #cfd8dc;
+      margin-bottom: 6px;
+      max-width: 700px;
+    }
+
+    footer {
+      padding: 14px 40px;
+      text-align: center;
+      font-size: 11px;
+      color: #78909c;
+      border-top: 1px solid #101b33;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">Vahanam</div>
+    <nav>
+      <a href="#listings">Browse cars</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#contact">Contact</a>
+      <button class="btn btn-outline">Guest access</button>
+      <button class="btn btn-primary">Login / Register</button>
+    </nav>
+  </header>
+
+  <!-- HERO: TEXT + SECURE REGISTRATION CARD -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Global platform to buy and sell cars</h1>
+      <p>
+        Vahanam is a global marketplace where owners in the USA, India and worldwide can list their own cars, and buyers can compare full details in one secure place.
+      </p>
+      <div class="hero-badges">
+        <span class="badge">For private owners & dealers</span>
+        <span class="badge">Advanced search & filters</span>
+        <span class="badge">Security‑ready registration</span>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <h2>Create your secure Vahanam account</h2>
+      <p>
+        Register once to save searches, shortlist cars, and contact sellers. Backend should use HTTPS, encrypted passwords, and anti‑bot checks for high security.
+      </p>
+      <form id="registerForm" autocomplete="on">
+        <div>
+          <label for="fullName">Full name</label>
+          <input id="fullName" name="fullName" type="text" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="username" required />
+        </div>
+        <div>
+          <label for="phone">Mobile number</label>
+          <input id="phone" name="phone" type="tel" required />
+        </div>
+        <div>
+          <label for="country">Country</label>
+          <select id="country" name="country" required>
+            <option value="">Select country</option>
+            <option value="US">United States</option>
+            <option value="IN">India</option>
+            <option value="CA">Canada</option>
+            <option value="UK">United Kingdom</option>
+          </select>
+        </div>
+        <div>
+          <label for="city">City / State</label>
+          <input id="city" name="city" type="text" required />
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="new-password" minlength="8" required />
+          <small>Use at least 8 characters with letters, numbers and symbols.</small>
+        </div>
+        <div>
+          <label for="role">I am</label>
+          <select id="role" name="role" required>
+            <option value="">Select role</option>
+            <option value="buyer">Buyer</option>
+            <option value="seller">Seller</option>
+            <option value="dealer">Dealer</option>
+          </select>
+        </div>
+        <!-- Placeholder for CAPTCHA / extra security -->
+        <div>
+          <label>Security check</label>
+          <small>Here you can integrate CAPTCHA or other anti‑bot protection in the backend.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Register now</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- LISTINGS SECTION: FIRST PAGE SHOWS DETAILS -->
+  <section class="section" id="listings">
+    <h2 class="section-title">Latest cars on Vahanam</h2>
+    <div class="filters">
+      <input type="text" placeholder="Search by brand or model" />
+      <select>
+        <option value="">Price (USD)</option>
+        <option value="1">Below 10,000</option>
+        <option value="2">10,000 – 25,000</option>
+        <option value="3">25,000 – 50,000</option>
+        <option value="4">50,000+</option>
+      </select>
+      <select>
+        <option value="">Fuel</option>
+        <option>Petrol / Gasoline</option>
+        <option>Diesel</option>
+        <option>Hybrid</option>
+        <option>Electric</option>
+      </select>
+      <select>
+        <option value="">Transmission</option>
+        <option>Automatic</option>
+        <option>Manual</option>
+      </select>
+      <select>
+        <option value="">Year</option>
+        <option>2025</option>
+        <option>2024</option>
+        <option>2021 – 2023</option>
+        <option>2016 – 2020</option>
+      </select>
+      <select>
+        <option value="">Location</option>
+        <option>USA</option>
+        <option>India</option>
+        <option>Canada</option>
+        <option>UK</option>
+      </select>
+    </div>
+
+    <div class="car-grid">
+      <!-- Example USA car -->
+      <article class="car-card">
+        <img src="https://via.placeholder.com/400x150?text=Car+Image" alt="Car image" />
+        <div class="car-body">
+          <div class="car-header">
+            <div class="car-title">2022 Tesla Model 3 Long Range</div>
+            <div class="car-price">$41,900</div>
+          </div>
+          <div class="car-meta">
+            <span>2022 • 12,000 miles</span>
+            <span>Electric • Automatic</span>
+            <span>Austin, TX, USA</span>
+          </div>
+          <div class="car-footer">
+            <span>Verified owner</span>
+            <span class="tag">EV</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Example India car -->
+      <article class="car-card">
+        <img src="https://via.placeholder.com/400x150?text=Car+Image" alt="Car image" />
+        <div class="car-body">
+          <div class="car-header">
+            <div class="car-title">Hyundai Creta SX Turbo</div>
+            <div class="car-price">₹18.2 Lakh</div>
+          </div>
+          <div class="car-meta">
+            <span>2023 • 9,500 km</span>
+            <span>Petrol • Automatic</span>
+            <span>Bengaluru, India</span>
+          </div>
+          <div class="car-footer">
+            <span>Dealer showroom</span>
+            <span class="tag">Top pick</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Example UK car -->
+      <article class="car-card">
+        <img src="https://via.placeholder.com/400x150?text=Car+Image" alt="Car image" />
+        <div class="car-body">
+          <div class="car-header">
+            <div class="car-title">2021 BMW 3 Series 320d</div>
+            <div class="car-price">£28,500</div>
+          </div>
+          <div class="car-meta">
+            <span>2021 • 22,000 miles</span>
+            <span>Diesel • Automatic</span>
+            <span>London, UK</span>
+          </div>
+          <div class="car-footer">
+            <span>Dealer</span>
+            <span class="tag">Featured</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS (EXPLAINS PLATFORM IDEA) -->
+  <section class="section" id="how-it-works">
+    <h2 class="section-title">How Vahanam works</h2>
+    <p class="how-text">
+      1. Vahanam is a global platform where private owners and dealers in countries like the USA, India and more can post their own cars for sale.
+    </p>
+    <p class="how-text">
+      2. Guests can freely browse all public car listings with filters and search on the first page; to shortlist or contact sellers, users must create a secure account.
+    </p>
+    <p class="how-text">
+      3. After login, users will have a personal dashboard (to be built in backend) to post cars, manage listings, and track enquiries.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    Vahanam &copy; 2025. Global car marketplace. All rights reserved.
+  </footer>
+
+  <!-- Here you can add JavaScript to send form data safely to your backend over HTTPS -->
+</body>
+</html>
+<!-- Example USA car -->
+<article class="car-card">
+  <img src="https://via.placeholder.com/400x150?text=Car+Image" alt="Car image" />
+  <div class="car-body">
+    <div class="car-header">
+      <div class="car-title">2022 Tesla Model 3 Long Range</div>
+      <div class="car-price">$41,900</div>
+    </div>
+    <div class="car-meta">
+      <span>2022 • 12,000 miles</span>
+      <span>Electric • Automatic</span>
+      <span>St. Louis, MO, USA</span>
+    </div>
+    <div class="car-footer">
+      <span>Verified owner</span>
+      <span class="tag">EV</span>
+    </div>
+  </div>
+</article>
+
+<!-- Example USA car -->
+<article class="car-card">
+  <img src="https://via.placeholder.com/400x150?text=Car+Image" alt="Car image" />
+  <div class="car-body">
+    <div class="car-header">
+      <div class="car-title">2022 Tesla Model 3 Long Range</div>
+      <div class="car-price">$41,900</div>
+    </div>
+    <div class="car-meta">
+      <span>2022 • 12,000 miles</span>
+      <span>Electric • Automatic</span>
+      <span>St. Louis, MO, USA</span>
+    </div>
+    <div class="car-footer">
+      <span>Verified owner</span>
+      <span class="tag">EV</span>
+    </div>
+  </div>
+</article>
+<div class="car-footer">
+  <span>Verified owner</span>
+  <span class="tag">Used</span>
+</div>
